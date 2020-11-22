@@ -31,8 +31,10 @@ def basic(request):
                     source = row.find("div", {"class": "news-link-right"}).get_text().strip()
                     details = row.find('td').get_text().strip()
 
-                    content = article_name + " " + link + " " + details + " " + source
-                    lst.append(str(content))
+                    content = '<b>'"Headline: "'</b>' + article_name + " " + '<b>'"Link: "'</b>' + link  + " "  + '<b>'"Timestamp: "'</b>' + details + " " + '<b>'"Source: "'</b>' + source
+
+                    lst.append('<br/>' + str(content) + '<br/>')
+                    
 
                 return HttpResponse(lst)
         else:
