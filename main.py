@@ -1,29 +1,16 @@
-from bs4 import BeautifulSoup
-import requests
-from csv import writer
+# This is a sample Python script.
 
-symbol = input("Enter a symbol you want to find the news for: ")
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-url = 'https://finviz.com/quote.ashx?t='
 
-res = requests.get(url + symbol, headers={'User-Agent': 'Mozilla/5.0'})
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-soup = BeautifulSoup(res.text, "html.parser")
 
-articles = soup.find_all("table", {"class": "fullview-news-outer"})
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
 
-with open('news.csv', 'w') as csv_file:
-    csv_writer = writer(csv_file)
-    headers = ['Link', 'Headline', 'Details','Source']
-    csv_writer.writerow(headers)
-
-    for newsElement in articles:
-        rows = newsElement.find_all('tr')
-        #print(rows)
-        
-        for row in rows:
-            link = row.find("a", {"class":"tab-link-news"})['href']
-            article_name = row.find("div", {"class":"news-link-left"}).get_text().strip()
-            source = row.find("div", {"class":"news-link-right"}).get_text().strip()
-            details = row.find('td').get_text().strip()
-            csv_writer.writerow([link, article_name, details, source])
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
